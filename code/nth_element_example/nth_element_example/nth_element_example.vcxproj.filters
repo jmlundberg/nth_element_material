@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="gtest_main.cpp" />
+    <ClCompile Include="src\nth_element_timings.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="leftover_headers\accumulate_text_example.h" />
+    <ClInclude Include="leftover_headers\coords_example.h" />
+    <ClInclude Include="src\P2375R0_nth_element.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="polynomials">
+      <UniqueIdentifier>{181df8cb-c617-4f2d-b73a-b3eaf61b3b87}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

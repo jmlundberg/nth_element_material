@@ -1,0 +1,21 @@
+---
+Checks:          '
+*,
+-*-use-equals-delete,
+-*-special-member-functions,
+-hicpp-exception-baseclass*,
+-hicpp-use-emplace,
+-modernize-use-emplace,
+hicpp-no-assembler,
+-modernize-loop-*,
+-readability-redundant-member-init,
+-hicpp-special-member-functions,
+-hicpp-special-*,
+-cppcoreguidelines-special-member-functions
+'
+ 
+// Due to google test: -hicpp-special-member-functions,
+// -cppcoreguidelines-*,
+// 
+
+HeaderFilterRegex: ''

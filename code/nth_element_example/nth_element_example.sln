@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nth_element_example", "nth_element_example\nth_element_example.vcxproj", "{3AEA61B7-4BA6-419B-2018-010000000000}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		_Debug|x64 = _Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3AEA61B7-4BA6-419B-2018-010000000000}._Debug|x64.ActiveCfg = Debug|x64
+		{3AEA61B7-4BA6-419B-2018-010000000000}._Debug|x64.Build.0 = Debug|x64
+		{3AEA61B7-4BA6-419B-2018-010000000000}.Release|x64.ActiveCfg = Release|x64
+		{3AEA61B7-4BA6-419B-2018-010000000000}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

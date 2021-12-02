@@ -1,0 +1,11 @@
+.vs
+x64
+x86
+externals
+ipch
+Release
+Debug
+*.sdf
+*.user
+_packaged
+obj

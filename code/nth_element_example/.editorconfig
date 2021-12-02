@@ -1,0 +1,182 @@
+# EditorConfig is awesome:http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Don't use tabs for indentation.
+[*]
+indent_style = space
+# (Please don't specify an indent_size here; that has too many unintended consequences.)
+
+# ----------------
+# Code files
+# ----------------
+[*.{cs,csx,vb,vbx,cpp,h,xaml}]
+indent_size = 2
+tab_width = 2
+max_line_length = 160
+
+# ----------------
+# Xml project files
+# ----------------
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+indent_size = 2
+tab_width = 2
+
+# ----------------
+# Xml config files
+# ----------------
+[*.{props,targets,ruleset,config,nuspec,resx,vsixmanifest,vsct}]
+indent_size = 2
+tab_width = 2
+
+
+[*.{cpp,h,hpp}]
+
+max_line_length = 160
+
+keep_blank_lines_in_declarations = 1
+keep_blank_lines_in_code = 1
+blank_lines_around_class_definition  = 1
+blank_lines_around_function_declaration  = 1
+blank_lines_around_function_definition  = 1
+blank_lines_around_single_line_function_definition  = 1
+blank_lines_around_namespace  = 1
+blank_lines_around_other_declaration  = 0
+
+# C++ brace placement
+
+brace_style = end_of_line_no_space 
+namespace_declaration_braces = end_of_line
+type_declaration_braces = next_line 
+place_namespace_definitions_on_same_line = false
+invocable_declaration_braces = next_line
+anonymous_method_declaration_braces = end_of_line
+
+case_block_braces = end_of_line 
+other_braces = end_of_line_no_space  
+expression_braces = outside_and_inside
+
+empty_block_style = together_same_line 
+simple_block_style = together_same_line
+
+# C++ indentation
+
+indent_style = spaces
+
+continuous_line_indent = double
+namespace_indentation = all
+indent_access_specifiers_from_class = false
+indent_wrapped_function_names = true
+indent_switch_labels = false
+indent_method_decl_pars = inside
+indent_invocation_pars = inside 
+indent_statement_pars = inside
+indent_preprocessor_directives = false
+
+# C++ alignment
+
+align_multiple_declaration = true
+align_multiline_parameter = true
+align_first_arg_by_paren = false
+align_multiline_type_parameter = true
+align_multiline_type_argument = false
+align_multiline_extends_list = true
+align_multiline_ctor_init = true
+outdent_commas = false
+align_ternary = align_all
+align_multiline_calls_chain = true
+outdent_dots = true
+align_multiline_binary_expressions_chain = true
+int_align_eq = false
+int_align_declaration_names = false
+int_align_comments = true
+
+# C++ spaces
+
+space_before_ptr_in_data_member = false
+space_before_ptr_in_data_members = true
+space_before_ptr_in_method = false
+space_after_ptr_in_data_member = true
+space_after_ptr_in_data_members = false
+space_after_ptr_in_method = false
+space_after_comma = true
+space_before_comma = false
+space_between_method_declaration_name_and_open_parenthesis = false
+space_between_method_declaration_empty_parameter_list_parentheses = false
+space_before_template_params = false
+space_within_template_params = false
+space_within_empty_template_params = false
+space_after_comma_in_template_params = true
+space_before_comma_in_template_params = true
+space_before_template_args = false
+space_within_template_args = true
+space_between_closing_angle_brackets_in_template_args = false
+space_around_alias_eq = true
+space_around_deref_in_trailing_return_type = false
+space_before_colon_in_inheritance_clause = false
+space_after_colon_in_inheritance_clause = true
+space_after_keywords_in_control_flow_statements = false
+space_between_parentheses_of_control_flow_statements = true
+space_before_semicolon_in_for_statement = true
+space_after_semicolon_in_for_statement = true
+space_after_for_colon = true
+space_before_colon_in_case = false
+space_after_colon_in_case = false
+space_around_binary_operator = true
+space_around_assignment_operator = true
+
+space_around_dot = false
+space_before_open_square_brackets = false
+space_within_array_access_brackets = false
+space_before_method_call_parentheses = false
+space_before_empty_method_call_parentheses = false
+space_between_typecast_parentheses = true
+space_after_cast = false
+
+space_between_method_call_empty_parameter_list_parentheses = false
+space_between_method_declaration_parameter_list_parentheses = true
+space_within_parentheses = true
+
+space_before_ternary_quest = true
+space_before_ternary_colon = true
+space_after_ternary_colon = true
+
+space_before_initializer_braces = false
+space_within_empty_initializer_braces = false
+space_before_trailing_comment = true
+disable_space_changes_before_trailing_comment = true
+
+space_between_method_call_parameter_list_parentheses = true
+cpp_space_between_method_call_parameter_list_parentheses = true 
+
+# C++ new lines
+
+new_line_before_else = true
+new_line_before_while = false
+new_line_before_catch = true
+simple_embedded_statement_style = line_break
+simple_case_statement_style = line_break
+function_definition_return_type_style = on_single_line 
+toplevel_function_definition_return_type_style = on_single_line 
+function_declaration_return_type_style = on_single_line
+toplevel_function_declaration_return_type_style = on_single_line
+break_template_declaration = do_not_change
+member_initializer_list_style = do_not_change   
+line_break_before_comma_in_member_initializer_lists = false 
+line_break_after_comma_in_member_initializer_lists = true
+wrap_before_comma = false
+wrap_ternary_expr_style = chop_if_long 
+wrap_before_ternary_opsigns = true
+wrap_before_colon = false
+wrap_enumeration_style = wrap_if_long 
+wrap_braced_init_list_style = chop_if_long 
+wrap_base_clause_style = chop_if_long 
+wrap_ctor_initializer_style = chop_if_long  
+wrap_parameters_style = chop_if_long  
+wrap_before_declaration_lpar = false
+wrap_after_declaration_lpar = false
+wrap_arguments_style = chop_if_long 
+wrap_before_invocation_lpar = false
+wrap_after_invocation_lpar = true
+
