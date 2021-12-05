@@ -1,1 +1,30 @@
-# std-nth_element_
+<div id="Nth_element_p3275">
+
+## Material on nth_element and P3275
+</div>
+
+#### P2375R0 2021-05-14
+
+This repo contains a basics performance study and background material on
+https://github.com/jmlundberg/p2375 :
+ Generalisation of nth_element to a range of nths
+
+
+#### Performance and complexity of nth_element vs std::sort
+
+The single-nth
+[`std::nth_element`](https://en.cppreference.com/w/cpp/algorithm/nth_element) has linear complexity: O(N), compared to O(N log N) of `std::sort`.
+
+The range-of-nths overload proposed in P2375 has complexity: O(N log m) where m is the number of unique partitioning points.
+
+
+#### Reference implementation
+
+A simple implementation of the range-of-nths version of `nth_element` is found at
+[code/nth_element_example/nth_element_example/src/P2375R0_nth_element.h](code/nth_element_example/nth_element_example/src/P2375R0_nth_element.h)
+
+#### Measurement on a basic implementation
+
+In practice, `nth-element` can be many times faster than a full `std::sort`.
+
+More details at [performance.md](PERFORMANCE.md)
