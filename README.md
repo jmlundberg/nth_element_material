@@ -36,4 +36,4 @@ Found at [plotting/examples/partition_based_image_equalization.md](plotting/exam
 
 Orgininal vs image equalization using `range-of-nths`, `m=5`
 
-<img alt="alt_text" width="38%" src="plotting/examples/forsen.png" /> <img alt="alt_text" width="38%" src="plotting/examples/forsen_partition5.png" />
+<img alt="alt_text" width="38%" src="plotting/examples/forsen.png?raw=1" /> <img alt="alt_text" width="38%" src="plotting/examples/forsen_partition5.png?raw=1" />
