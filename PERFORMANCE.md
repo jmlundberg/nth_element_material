@@ -2,7 +2,9 @@
 
 #### Performance of reference implementation of range-of-nths version of `nth_element`
 
-Back to [README.md](README.md)
+Back to [github material_on_nth_element/README.md](README.md)
+
+Or to proposal at https://github.com/jmlundberg/p2375
 
 ## Time vs `std::sort` for equidistant partitioning points
 
@@ -15,7 +17,7 @@ The image shows that the speed curves approximately follow the expected `log(N)`
 
 Note: Some care on interpreting the values at low N: For example at the curve `m=1000`. `N=300`, the actual number of partitioning points are saturated to `N`, that is `300` unique partitioning points.
 
-Still, one can say, that as `N` decreases and approaches `m` the performance is worse than `std::sort`, but the speed in these tests are still about `85%` of `std::sort` even for `m ~ N`.
+Still, one can say, that as `N` decreases and approaches `m` the performance is worse than `std::sort`, but the speed in these tests are still about `85%` of `std::sort` even for `m ~ N`. The benefit of `nth_element` over `sort` grows with `N` as `log N`.
 
 With `m = 1` partitioning points the speed of `nth_element` is about `10` times that of `std::sort` at `N=3e7`.
 
