@@ -13,7 +13,7 @@ The subject described for example at https://en.wikipedia.org/wiki/Histogram_equ
 
 Equalization makes use of the
 [Cumulative distribution function, CDF](https://en.wikipedia.org/wiki/Cumulative_distribution_function)(wikipedia) of the image (or data in general).
-The cumulative distribution can be estimated by taking the cumulant of a *histogram* of the data. The accuracy is thus a result is thus a function of the selected binning in relation to the distribution of the data. Finding good bins is itself done by histogram normalization, which itself relies on an estimated CDF.
+The cumulative distribution can be estimated by taking the cumulant of a *histogram* of the data. The result is thus a function of the selected binning in relation to the distribution of the data. Finding good bins is itself done by histogram normalization, which itself relies on an estimated CDF.
 
 ### Sort and partition (nth_element) based image normalization
 
@@ -40,7 +40,7 @@ The exact CDF (using sort) is shown in gray, along with the `range-of-nths` appr
 
 #### Applied example - "Tennforsen"
 
-Example image: Einstein. Original (left), equalized using sort-based CDF (right)
+Example image: Tennforsen (Sweden). Original (left), equalized using sort-based CDF (right)
 
 original, vs sort based:
 
