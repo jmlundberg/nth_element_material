@@ -11,7 +11,7 @@ Or to proposal at https://github.com/jmlundberg/p2375
 [<img alt="alt_text" width="68%" src="plotting/images/partition_points_equidistant_speed_for_n_vs_sort.png" />](plotting/images/partition_points_equidistant_speed_for_n_vs_sort.png)
 
 The above image shows the execution speed of `nth_element` compared to `std::sort` for various vector sizes `N`.
-The data to sort here consists of randomly shuffled integers, and the range-of-nths version of `nth_element` was given different numbers `m` of evenly spaced partitioning points in the vector. Dotted lines show lines `k_i × log(N)` fitted to pass though each curve at `N=3e6`.
+The data to sort here consists of randomly shuffled doubles, and the range-of-nths version of `nth_element` was given different numbers `m` of evenly spaced partitioning points in the vector. Dotted lines show lines `k_i × log(N)` fitted to pass though each curve at `N=3e6`.
 
 The image shows that the speed curves approximately follow the expected `log(N)` shape, with different factors for different `m`.
 
