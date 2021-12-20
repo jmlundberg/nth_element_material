@@ -1,5 +1,5 @@
 
-#include "P2375R0_nth_element.h"
+#include "P2375_nth_element.h"
 
 #include <random>
 #include <chrono>
@@ -11,56 +11,10 @@
 #include <numeric>
 #include <string>
 
+#include "unit_test_helpers.h"
+
 namespace nth_elements_timing {
-
-  template <typename... Args>
-  std::string dyna_print(std::string_view rt_fmt_str, Args&&... args) {
-    return std::vformat(rt_fmt_str, std::make_format_args(args...));
-  }
-
-  struct Timer {
-    std::chrono::time_point<std::chrono::high_resolution_clock> start;
-    static std::chrono::time_point<std::chrono::high_resolution_clock> now() {
-      return std::chrono::high_resolution_clock::now();
-    }
-    Timer() noexcept : start(now()) { }
-    auto reset() noexcept { return start = now(); }
-    [[nodiscard]] auto tock() const noexcept {
-      return now() - start;
-    }
-
-    [[nodiscard]] long long tock_ms() const {
-      return std::chrono::duration_cast<std::chrono::milliseconds>(now() - start).count();
-    }
-    [[nodiscard]] long long tock_ns() const {
-      return std::chrono::duration_cast<std::chrono::nanoseconds>(now() - start).count();
-    }
-    [[nodiscard]] long long tock_us() const {
-      return std::chrono::duration_cast<std::chrono::microseconds>(now() - start).count();
-    }
-  };
-
-  template <typename Arg, typename... Args>
-  void doPrint(std::ostream& out, Arg&& arg, Args&&... args)
-{
-    out << std::forward<Arg>(arg);
-    ((out << ',' << std::forward<Args>(args)), ...);
-}
-
-  template <typename Arg, typename... Args>
-  void printJsonLine(std::ostream& out, Arg&& arg, Args&&... args)
-{
-    out <<"[" << std::forward<Arg>(arg);
-    ((out << ',' << std::forward<Args>(args)), ...);
-    out <<"],\n" << std::flush;
-}
-
-  template<typename T>
-  constexpr auto square(const T& v)
-  {
-    return v * v;
-  }
-
+  
 static void nthElementsTests_time_nths() {
   const auto outerRounds = 12;
   for (const auto vecSize : { 30,300,3000,30000,300000,3000000,30000000 }) {
@@ -77,16 +31,16 @@ static void nthElementsTests_time_nths() {
  
         int constantNumQ = 1 + constantNumQ_i;
         if (constantNumQ_i > 4) {
-          constantNumQ = 10 + 10 * square(constantNumQ_i - 4 - 1) ;
+          constantNumQ = 10 + 10 * NthElementsUnitTestHelpers::square(constantNumQ_i - 4 - 1) ;
         }
         if (constantNumQ_i > 7) {
-          constantNumQ = 100 + 100 * square(constantNumQ_i - 7 - 1);
+          constantNumQ = 100 + 100 * NthElementsUnitTestHelpers::square(constantNumQ_i - 7 - 1);
         }
         if (constantNumQ_i == nCases - 1) {
           constantNumQ = vecSize;
         }
 
-        Timer timer;
+        NthElementsUnitTestHelpers::Timer timer;
         auto totT = 0.0;
         auto totTS = 0.0;
         const auto numSizeTrials = 2;
@@ -131,7 +85,9 @@ static void nthElementsTests_time_nths() {
             if (trials % 2 == outerRound % 2)
             {
               const auto t0 = timer.tock_ns();
-              P2375_nth_element::R0::nth_elements(v.begin(), ns.begin(), ns.end(), v.end());
+              //P2375_nth_element::R0::nth_elements(v.begin(), ns.begin(), ns.end(), v.end());
+              P2375_nth_element::Current::ranges::nth_elements(v, ns);
+              //P2375_nth_element::Current::ranges::nth_elements(v.begin(), ns, v.end());
               const auto t1 = timer.tock_ns();
               thisTrial += (t1 - t0) * 1.0;
               ++rounds;
@@ -159,7 +115,7 @@ static void nthElementsTests_time_nths() {
         thisTrialMeanS *= 1.0 / roundsS;
         totTS += thisTrialMeanS;
         avgT += totT * 1e-9;
-        printJsonLine(std::cout, outerRound, vecSize, constantNumQ, nths_size, totTS / totT, log(vecSize) / log(nths_size * 1.0), totT * 1e-9, avgT / (1.0 + constantNumQ_i));
+        NthElementsUnitTestHelpers::printJsonLine(std::cout, outerRound, vecSize, constantNumQ, nths_size, totTS / totT, log(vecSize) / log(nths_size * 1.0), totT * 1e-9, avgT / (1.0 + constantNumQ_i));
         
       }
     }

@@ -231,13 +231,15 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\nth_element_basics.cpp" />
     <ClCompile Include="src\nth_element_timings.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClInclude Include="leftover_headers\accumulate_text_example.h" />
     <ClInclude Include="leftover_headers\coords_example.h" />
+    <ClInclude Include="src\unit_test_helpers.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="src\P2375R0_nth_element.h" />
+    <ClInclude Include="src\P2375_nth_element.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gtest_main.cpp" />
