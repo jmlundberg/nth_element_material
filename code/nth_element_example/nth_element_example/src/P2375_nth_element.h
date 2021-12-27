@@ -82,15 +82,12 @@ namespace P2375_nth_element {
 					constexpr std::ranges::borrowed_iterator_t<R>
 					operator()(R&& r, R2&& nths, Comp comp = {}, Proj proj = {}) const
 				{
-					// Todo. C++20 nth_element returns std::ranges::dangling if lvalue or "borrowed_type".
-					// we should be transparent with respect to that, but for now, just return last
 					const auto first = std::begin(r);
 					const auto last = std::end(r);
 					const auto nth_first = std::begin(nths);
 					const auto nth_last = std::end(nths);
 					if (last - first <= 64) {
-						std::ranges::sort(std::ranges::subrange(first, last), comp, proj);
-						return last;
+						return std::ranges::sort(r, comp, proj);
 					}
 					const auto nth_dist = nth_last - nth_first;
 					if (nth_dist == 0 || *nth_first == last) return last;

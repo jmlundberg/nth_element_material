@@ -154,6 +154,15 @@ namespace nth_elements_basics {
 			}
 		}
 	}
+
+	static void nthElementsTests_dangle() {
+		auto v = std::vector<int>(10, 10);
+		const std::vector nths{ v.begin() + 1, v.begin() + 2 };
+		auto e = P2375_nth_element::Current::ranges::nth_elements(v, nths);
+		static_assert(!std::is_same_v<decltype(e), std::ranges::dangling>);
+		auto dangle = P2375_nth_element::Current::ranges::nth_elements(std::move(v), nths);
+		static_assert(std::is_same_v<decltype(dangle),std::ranges::dangling>);
+	}
 }
 
 #if __has_include(<gtest/gtest.h>)
@@ -165,6 +174,11 @@ TEST_F(NthElementsTestBasics, basics_uniform) {
 TEST_F(NthElementsTestBasics, basics_random) {
 	nth_elements_basics::nthElementsTests_correct(false);
 }
+TEST_F(NthElementsTestBasics, dangle) {
+	nth_elements_basics::nthElementsTests_dangle();
+}
+
+
 #else
 int main()
 {
