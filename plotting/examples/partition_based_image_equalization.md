@@ -27,42 +27,39 @@ That is, we use a range-of-nth partitioning to approximate the full sorted data 
 
 Example image: Einstein. Original (left), equalized using sort-based CDF (right)
 
-[<img alt="alt_text" src="einstein.png" />](einstein.png?raw=1) [<img alt="alt_text" src="einstein_sort.png" />](einstein_sort.png?raw=1)
+<img alt="alt_text" src="out_small/einstein_roundtrip.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_sort.small.jpg?raw=true" />
 
 Again, the original (left), compared to equalization using approximate CDF using **range-of-nths** partitioning with `m=7`, `m=5`, or `m=3` partition points.
 
-[<img alt="alt_text" src="einstein.png" />](einstein.png?raw=1) [<img alt="alt_text" src="einstein_partition7.png" />](einstein_partition7.png?raw=1) [<img alt="alt_text" src="einstein_partition5.png" />](einstein_partition5.png?raw=1) [<img alt="alt_text" src="einstein_partition3.png" />](einstein_partition3.png?raw=1)
+<img alt="alt_text" src="out_small//einstein_roundtrip.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_partition7.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_partition5.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_partition3.small.jpg?raw=true" />
 
 The exact CDF (using sort) is shown in gray, along with the `range-of-nths` approximations.
 
 
-[<img alt="alt_text" width="48%" src="einstein_cdf_approximation.png" />](einstein_cdf_approximation.png?raw=1) .
+<img alt="alt_text" width="48%" src="out_large/einstein_cdf_approximation.png?raw=true" />.
 
-#### Applied example - "Tennforsen"
+#### Applied example - "Tännforsen"
 
-Example image: Tennforsen (Sweden). Original (left), equalized using sort-based CDF (right)
+Example image: Tännforsen (Sweden). Original (left), equalized using sort-based CDF (right)
 
 original, vs sort based:
 
-[<img alt="alt_text" width="48%" src="forsen.png" />](forsen.png?raw=1) [<img alt="alt_text" width="48%" src="forsen_sort.png" />](forsen_sort.png?raw=1)
-
+<img alt="alt_text" width="48%" src="out_small/forsen_roundtrip.small.jpg?raw=true" /> <img alt="alt_text" width="48%" src="out_small/forsen_sort.small.jpg?raw=true" />
 
 Again, the original (left), compared to equalization using approximate CDF using **range-of-nths** partitioning with `m=5`, `m=3`, or `m=3` partition points:
 
 original, vs `m=5`:
 
-[<img alt="alt_text" width="48%" src="forsen.png" />](forsen.png?raw=1)
-[<img alt="alt_text" width="48%" src="forsen_partition5.png" />](forsen_partition5.png?raw=1)
+<img alt="alt_text" width="48%" src="out_small/forsen_roundtrip.small.jpg?raw=true" /> <img alt="alt_text" width="48%" src="out_small/forsen_partition5.small.jpg?raw=true" />
 
 `m=3`, vs `m=2`:
 
-[<img alt="alt_text" width="48%" src="forsen_partition3.png" />](forsen_partition3.png?raw=1)
- [<img alt="alt_text" width="48%" src="forsen_partition2.png" />](forsen_partition2.png?raw=1)
+<img alt="alt_text" width="48%" src="out_small/forsen_partition3.small.jpg?raw=true" /> <img alt="alt_text" width="48%" src="out_small/forsen_partition2.small.jpg?raw=true" />
 
 
 The exact CDF (using sort) is shown in gray, along with the `range-of-nths` approximations.
 
-[<img alt="alt_text" width="48%" src="forsen_cdf_approximation.png" />](forsen_cdf_approximation.png?raw=1) .
+<img alt="alt_text" width="48%" src="out_large/forsen_cdf_approximation.png?raw=true" />.
 
 #### Summary and notes
 

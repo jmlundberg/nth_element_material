@@ -3,12 +3,11 @@
 ## Material on nth_element and P3275
 </div>
 
-#### P2375R0 2021-05-14
 
-This repo contains a basics performance study and background material on
+This repo contains a simple implementation, a basics performance study, examples and
+background material on
 https://github.com/jmlundberg/p2375 :
  Generalisation of nth_element to a range of nths
-
 
 #### Performance and complexity of nth_element vs std::sort
 
@@ -36,4 +35,4 @@ Found at [plotting/examples/partition_based_image_equalization.md](plotting/exam
 
 Orgininal vs image equalization using `range-of-nths`, `m=5`
 
-<img alt="alt_text" width="38%" src="plotting/examples/forsen.png?raw=1" /> <img alt="alt_text" width="38%" src="plotting/examples/forsen_partition5.png?raw=1" />
+<img alt="alt_text" width="38%" src="plotting/examples/out_small/forsen_roundtrip.small.jpg?raw=true" /> <img alt="alt_text" width="38%" src="plotting/examples/out_small/forsen_partition5.small.jpg?raw=true" />
