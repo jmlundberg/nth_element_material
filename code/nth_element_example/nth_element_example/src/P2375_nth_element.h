@@ -35,7 +35,7 @@ namespace P2375_nth_element {
 					std::ranges::random_access_range R2,
 					class Comp = std::ranges::less, class Proj = std::identity>
 					requires std::sortable< std::ranges::iterator_t<R>, Comp, Proj>
-					&& std::convertible_to<decltype(*std::declval<R2>().begin()), decltype(std::declval<R>().begin())>
+					&& std::convertible_to< std::iter_reference_t<std::ranges::iterator_t<R2>>, std::ranges::iterator_t<R>>
 					constexpr std::ranges::borrowed_iterator_t<R>
 					operator()(R&& r, R2&& nths, Comp comp = {}, Proj proj = {}) const
 				{
@@ -69,7 +69,7 @@ namespace P2375_nth_element {
 				template<std::random_access_iterator I, std::sentinel_for<I> S,
 					std::ranges::random_access_range R2, class Comp = std::ranges::less, class Proj = std::identity>
 					requires std::sortable<I, Comp, Proj>
-				  && std::convertible_to<decltype(*std::declval<R2>().begin()), I>
+				  && std::convertible_to<std::iter_reference_t<std::ranges::iterator_t<R2>>, I>
 					constexpr I
 					operator()(I first, R2&& nths, S last, Comp comp = {}, Proj proj = {}) const
 				{
