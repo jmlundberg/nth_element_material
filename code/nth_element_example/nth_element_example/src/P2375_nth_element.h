@@ -8,8 +8,8 @@ namespace P2375_nth_element {
 	
 	namespace Current{
 
-		template< class RandomAccessIterator, class RandomAccessIterator2 >
-		constexpr void nth_elements(RandomAccessIterator first, RandomAccessIterator2 nth_first, RandomAccessIterator2 nth_last, RandomAccessIterator last)
+		template< class RandomAccessIterator, class RandomAccessIteratorNths >
+		constexpr void nth_elements(RandomAccessIterator first, RandomAccessIteratorNths nth_first, RandomAccessIteratorNths nth_last, RandomAccessIterator last)
 		{
 			return Current::nth_elements(first, nth_first, nth_last, last, std::less<>());
 		}
@@ -30,14 +30,14 @@ namespace P2375_nth_element {
 			public:
 				using NotQuiteObject::NotQuiteObject;
 
-				//signature nth_elements(R&& r, R2&& nths, Comp comp = {}, Proj proj = {})
+				//signature nth_elements(R&& r, Nths&& nths, Comp comp = {}, Proj proj = {})
 				template<std::ranges::random_access_range R,
-					std::ranges::random_access_range R2,
+					std::ranges::random_access_range Nths,
 					class Comp = std::ranges::less, class Proj = std::identity>
 					requires std::sortable< std::ranges::iterator_t<R>, Comp, Proj>
-					&& std::convertible_to< std::iter_reference_t<std::ranges::iterator_t<R2>>, std::ranges::iterator_t<R>>
+					&& std::convertible_to< std::iter_reference_t<std::ranges::iterator_t<Nths>>, std::ranges::iterator_t<R>>
 					constexpr std::ranges::borrowed_iterator_t<R>
-					operator()(R&& r, R2&& nths, Comp comp = {}, Proj proj = {}) const
+					operator()(R&& r, Nths&& nths, Comp comp = {}, Proj proj = {}) const
 				{
 					constexpr auto RevertToSortAt = 64;
 
@@ -65,13 +65,13 @@ namespace P2375_nth_element {
 					return last;
 				}
 
-				//Signature nth_elements(I first, R2&& nths, S last, Comp comp = {}, Proj proj = {})
+				//Signature nth_elements(I first, Nths&& nths, S last, Comp comp = {}, Proj proj = {})
 				template<std::random_access_iterator I, std::sentinel_for<I> S,
-					std::ranges::random_access_range R2, class Comp = std::ranges::less, class Proj = std::identity>
+					std::ranges::random_access_range Nths, class Comp = std::ranges::less, class Proj = std::identity>
 					requires std::sortable<I, Comp, Proj>
-				  && std::convertible_to<std::iter_reference_t<std::ranges::iterator_t<R2>>, I>
+				  && std::convertible_to<std::iter_reference_t<std::ranges::iterator_t<Nths>>, I>
 					constexpr I
-					operator()(I first, R2&& nths, S last, Comp comp = {}, Proj proj = {}) const
+					operator()(I first, Nths&& nths, S last, Comp comp = {}, Proj proj = {}) const
 				{
 					return Nth_elements_fn::operator()(std::ranges::subrange(first, last), nths, comp, proj);
 				}
@@ -80,8 +80,8 @@ namespace P2375_nth_element {
 
 		}
 
-		template< class RandomAccessIterator, class RandomAccessIterator2, class Comp>
-		constexpr void nth_elements(RandomAccessIterator first, RandomAccessIterator2 nth_first, RandomAccessIterator2 nth_last, RandomAccessIterator last, Comp comp)
+		template< class RandomAccessIterator, class RandomAccessIteratorNths, class Comp>
+		constexpr void nth_elements(RandomAccessIterator first, RandomAccessIteratorNths nth_first, RandomAccessIteratorNths nth_last, RandomAccessIterator last, Comp comp)
 		{
 			return ranges::nth_elements(std::ranges::subrange(first, last), std::ranges::subrange(nth_first, nth_last), comp);
 		}
