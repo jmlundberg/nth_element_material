@@ -13,7 +13,7 @@ from matplotlib import pyplot as plt
 import matplotlib
 inf=numpy.nan
 
-random_partitions=True
+random_partitions=False
 if random_partitions:
     casename = "partition_points_random"
     fname= "timing_data/datatableLarger_n1.txt"
@@ -53,6 +53,8 @@ fig, ax1 = plt.subplots()
 fig.set_figwidth(4)
 fig.set_figheight(4)
 ax1.grid(color='#aaaaaa', linestyle='-', linewidth=0.37)
+
+summary=""
 
 colors=['gray','green','blue','black','purple','red','magenta']
 colors_i=0
@@ -106,6 +108,12 @@ for i,N in enumerate(Ns):
         if x[x_i]<20 or thinLine[x_i]<0.6:
             thinLine[x_i]=math.nan
     ax1.plot(x,thinLine,':',color=color,linewidth=0.2)
+    if(N>300):
+        summary=summary+("\nN: %.0e"%N).replace("+0","")
+        summary+="\n  m: "+" ".join(["%6.0f"%f for f in x])
+        summary+="\n su: "+" ".join(["%6.1f"%f for f in ysMean])
+
+print(summary)
 
 ax1.set_xlim([0.9, 120000*10])
 #ax1.set_xlim([0.9, 12000])
