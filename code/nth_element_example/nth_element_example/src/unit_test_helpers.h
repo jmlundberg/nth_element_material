@@ -5,7 +5,7 @@
 #include <chrono>
 #include <string>
 
-namespace NthElementsUnitTestHelpers {
+namespace unit_test_helpers {
 
   template <typename... Args>
   std::string dyna_print(std::string_view rt_fmt_str, Args&&... args) {
@@ -55,15 +55,5 @@ namespace NthElementsUnitTestHelpers {
     return v * v;
   }
 }
-
-#if __has_include(<gtest/gtest.h>)
-#include <gtest/gtest.h>
-#define test_assert_eq  ASSERT_EQ
-#define test_assert_le  ASSERT_LE
-#define test_assert_lt  ASSERT_LT
-#define test_assert_ne  ASSERT_NE
-#else
-//  void 
-#endif 
 
 #endif

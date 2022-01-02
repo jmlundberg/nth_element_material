@@ -166,6 +166,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -189,6 +190,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <Profile>true</Profile>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -232,17 +234,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\nth_element_basics.cpp" />
-    <ClCompile Include="src\nth_element_timings.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="src\nth_element_timings.cpp" />
+    <ClCompile Include="src\unit_test_helpers.cpp" />
+    <ClCompile Include="src\variations\multi_quick_select.cpp" />
+    <ClCompile Include="src\variations\multi_select_by_nths_bisect.cpp" />
+    <ClCompile Include="src\variations\multi_select_by_nths_bisect_at_center_iterator.cpp" />
     <ClInclude Include="leftover_headers\accumulate_text_example.h" />
     <ClInclude Include="leftover_headers\coords_example.h" />
-    <ClInclude Include="src\unit_test_helpers.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="src\P2375_nth_element.h" />
+    <ClInclude Include="src\unit_test_helpers.h" />
+    <ClInclude Include="src\variations\leftowers_misc.h" />
+    <ClInclude Include="src\variations\multi_quick_select.h" />
+    <ClInclude Include="src\variations\multi_select_by_nths_bisect.h" />
+    <ClInclude Include="src\variations\multi_select_by_nths_bisect_at_center_iterator.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="src\multi_select_by_nth_bisect.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="gtest_main.cpp" />
+    <ClCompile Include="src\gtest_main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

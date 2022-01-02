@@ -17,36 +17,31 @@ random_partitions=True
 if random_partitions:
     casename = "partition_points_random"
     fname= "timing_data/datatableLarger_n1.txt"
+    fname= "timing_data/tmpdata1_select_on_iter_rnd.txt"
+    fname= "timing_data/tmpdata1_rnd.txt"
+    fname= "timing_data/tmpdata1_quickselect_rnd.txt"
     label="random partition points"
-
-    casename = "mqs_med3_rnd"
-    fname = "timing_data/dataLarger_"+casename+".txt"
-
 else:
     casename = "partition_points_equidistant"
     fname= "timing_data/datatableLarger_n1_equi.txt"
+    fname= "timing_data/tmpdata1_select_on_iter.txt"
     label="equidistant partition points"
-
-    casename = "mqs_med3_equi"
-    fname = "timing_data/dataLarger_"+casename+".txt"
-
 
 datafile="\n".join([l for l in open(fname).readlines() if not "#" in l]).replace("inf","10000.0")
 d=json.loads(datafile)
+
 data=np.array(d)
 
 oRounds=sorted({k[0] for k in data})
 Ns=sorted({k[1] for k in data})
 
 def removeOutliers(data,outliers):
-    if len(data)-2*outliers<2:
-        return data
-        #raise Exception("too little data")
-    return numpy.partition(data,[outliers,len(data)-outliers-1],axis=0)[outliers:len(data)-outliers-1]
-#    return numpy.partition(data,[outliers,trials-outliers-1],axis=0)[outliers:trials-outliers-1]
+    if len(data)<2*outliers:
+        raise Exception("too little data")
+    return numpy.partition(data,[outliers,len(data)-outliers-1])[outliers:len(data)-outliers]
 
 def saveFig(fg,name):
-    fg.savefig(name, dpi=600,bbox_inches='tight')
+    fg.savefig(name+".tmp.png", dpi=600,bbox_inches='tight')
     
 
 fig, ax1 = plt.subplots() 
@@ -67,13 +62,10 @@ for i,N in enumerate(Ns):
 
     for round_i in oRounds:
         m=sorted([[k[3],k[4],k[3]] for k in data if k[0]==round_i and k[1] == N])
-        try:
-            x,y,mActual = list(zip(*m))
-            x=np.array(x)
-            ys.append(y)
-            msActual.append(mActual)
-        except:
-            print("undexpected data shape")
+        x,y,mActual = list(zip(*m))
+        x=np.array(x)
+        ys.append(y)
+        msActual.append(mActual)
 
     msActualNo = numpy.array(msActual)
     msActualMean=numpy.mean(msActual,axis=0)
@@ -83,15 +75,10 @@ for i,N in enumerate(Ns):
     ax1.set_ylabel("speed factor vs std::sort") 
     ax1.set_xlabel("number of partition points") 
     ax1.set_xscale('log')
-    #ax1.set_yscale('log')
-
     ys=numpy.array(ys)
-    outliers=3
+    outliers=0
     trials= ys.shape[0]
     ysStd=numpy.std(ys,axis=0)
-    ys=removeOutliers(ys,outliers)
-    #ys=numpy.partition(ys,[outliers,trials-outliers-1],axis=0)[outliers:trials-outliers-1]
-   
     ysMean=numpy.mean(ys,axis=0)
     line=plt.errorbar(x,ysMean,ysStd, fmt='.-',ecolor=color,color=color,linewidth=0.5)
     #line=plt.errorbar(x,ysMean,ysStd, msActualStd, fmt='.-',ecolor=colors[i],color=colors[i])
@@ -168,12 +155,10 @@ for i,M in enumerate(Ms):
     ax1.set_xscale('log')
     #ax1.set_yscale('log')
     
-    outliers=3
+    outliers=0
     ys=numpy.array(ys)
     trials= ys.shape[0]
     ysStd=numpy.std(ys,axis=0)
-    ys=removeOutliers(ys,outliers)
-    #ys=numpy.partition(ys,[outliers,trials-outliers-1],axis=0)[outliers:trials-outliers-1]
     ysMean=numpy.mean(ys,axis=0)
     #ysStd=numpy.std(ys,axis=0)
     for j in range(len(ysMean)):
@@ -185,8 +170,7 @@ for i,M in enumerate(Ms):
     line.set_label("m="+str(int(M)))
     ref=len(ysMean)-2
     ax1.plot(x,numpy.multiply(ysMean[ref]/numpy.log(x[ref]),numpy.log(x)),':',color=color,linewidth=0.3)
-    
-
+  
 ax1.set_xlim([200, 3500000*10])
 #ax1.set_xlim([0.9, 12000])
 #ax1.set_xlim([0.9, 1200])
