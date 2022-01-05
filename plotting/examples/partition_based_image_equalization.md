@@ -17,26 +17,11 @@ The cumulative distribution can be estimated by taking the cumulant of a *histog
 
 ### Sort and partition (nth_element) based image normalization
 
-An interesting alternative to cumulant-of-histrogram, is to calculate or estimate the CDF from the ordered data directly. If this is done with a full sort, and exact descriptive CDF is obtained, resulting in a loss-less equalization (modulo floating point and image format aspects).
+An interesting alternative to cumulant-of-histogram, is to calculate or estimate the CDF from the ordered data directly. If this is done with a full sort, and exact descriptive CDF is obtained, resulting in a loss-less equalization (modulo floating point and image format aspects).
 
 As a performance optimization we can avoid a full sort, and instead use multi-nth `partition`, aka `nth_element` of [p2375](https://github.com/jmlundberg/p2375)
 to ensure exact results at specific cumulant values (partition points) in the CDF, such as at 0.25, 0.5, 0.75.
 That is, we use a range-of-nth partitioning to approximate the full sorted data (here using linear interpolation for simplicity).
-
-#### Applied example - Einstein
-
-Example image: Einstein. Original (left), equalized using sort-based CDF (right)
-
-<img alt="alt_text" src="out_small/einstein_roundtrip.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_sort.small.jpg?raw=true" />
-
-Again, the original (left), compared to equalization using approximate CDF using **range-of-nths** partitioning with `m=7`, `m=5`, or `m=3` partition points.
-
-<img alt="alt_text" src="out_small//einstein_roundtrip.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_partition7.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_partition5.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_partition3.small.jpg?raw=true" />
-
-The exact CDF (using sort) is shown in gray, along with the `range-of-nths` approximations.
-
-
-<img alt="alt_text" width="48%" src="out_large/einstein_cdf_approximation.png?raw=true" />.
 
 #### Applied example - "Tännforsen"
 
@@ -60,6 +45,22 @@ original, vs `m=5`:
 The exact CDF (using sort) is shown in gray, along with the `range-of-nths` approximations.
 
 <img alt="alt_text" width="48%" src="out_large/forsen_cdf_approximation.png?raw=true" />.
+
+
+#### Applied example - Einstein
+
+Example image: Einstein. Original (left), equalized using sort-based CDF (right)
+
+<img alt="alt_text" src="out_small/einstein_roundtrip.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_sort.small.jpg?raw=true" />
+
+Again, the original (left), compared to equalization using approximate CDF using **range-of-nths** partitioning with `m=7`, `m=5`, or `m=3` partition points.
+
+<img alt="alt_text" src="out_small//einstein_roundtrip.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_partition7.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_partition5.small.jpg?raw=true" /> <img alt="alt_text" src="out_small/einstein_partition3.small.jpg?raw=true" />
+
+The exact CDF (using sort) is shown in gray, along with the `range-of-nths` approximations.
+
+
+<img alt="alt_text" width="48%" src="out_large/einstein_cdf_approximation.png?raw=true" />.
 
 #### Summary and notes
 
