@@ -1,7 +1,9 @@
+/*
+ Johan Lundberg 2022-01-08
+*/
+
 #pragma once
 
-#ifndef UNIT_TEST_HELPERS_NTHELEMENTS_H_
-#define UNIT_TEST_HELPERS_NTHELEMENTS_H_
 #include <chrono>
 #include <string>
 
@@ -35,18 +37,19 @@ namespace unit_test_helpers {
   };
 
   template <typename Arg, typename... Args>
-  void doPrint(std::ostream& out, Arg&& arg, Args&&... args)
-  {
-    out << std::forward<Arg>(arg);
-    ((out << ',' << std::forward<Args>(args)), ...);
-  }
-
-  template <typename Arg, typename... Args>
   void printJsonLine(std::ostream& out, Arg&& arg, Args&&... args)
   {
     out << "[" << std::forward<Arg>(arg);
     ((out << ',' << std::forward<Args>(args)), ...);
     out << "],\n" << std::flush;
+  }
+
+  template <typename Arg, typename... Args>
+  void printSpaceLine(std::ostream& out, Arg&& arg, Args&&... args)
+  {
+    out << std::forward<Arg>(arg);
+    ((out << ' ' << std::forward<Args>(args)), ...);
+    out << "\n" << std::flush;
   }
 
   template<typename T>
@@ -56,4 +59,3 @@ namespace unit_test_helpers {
   }
 }
 
-#endif

@@ -1,4 +1,6 @@
-
+/*
+ Johan Lundberg 2022-01-08
+*/
 
 #include <random>
 #include <chrono>
@@ -11,10 +13,11 @@
 #include <string>
 
 #include "unit_test_helpers.h"
-#include "variations/multi_quick_select.h"
+#include "multi_quick_select.h"
 
 #include <gtest/gtest.h>
 
+/// Some timing tests
 namespace multi_select_timing {
 
   struct NthElementsTest : testing::Test {};
@@ -23,7 +26,9 @@ namespace multi_select_timing {
     constexpr auto quickRelativeTestRounds = 2;
     constexpr auto doRandomIters = false;
 
-#define multi_select_under_test   quickselect_nth_element::ranges::multi_quick_select
+    constexpr auto multi_select_under_test = [](auto&& r, auto&& nths) {
+      return nthexple::ranges::multi_intro_select(r, nths);
+    };
 
     constexpr auto fakeSortTime = quickRelativeTest;
     for (const auto vecSize : { 30,300,3000,30'000,300'000,3'000'000,30'000'000 }) {
@@ -98,7 +103,7 @@ namespace multi_select_timing {
               if (trials % 2 == outerRound % 2)
               {
                 const auto t0 = timer.tock_ns();
-                multi_select_under_test(v, ns);
+                (void) multi_select_under_test(v, ns);
                 const auto t1 = timer.tock_ns();
                 thisTrial += (t1 - t0) * 1.0;
                 ++rounds;

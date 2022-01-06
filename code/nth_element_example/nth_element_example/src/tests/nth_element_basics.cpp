@@ -1,3 +1,7 @@
+/*
+ Johan Lundberg 2022-01-08
+
+*/
 
 #include <random>
 #include <chrono>
@@ -10,14 +14,18 @@
 #include <string>
 
 #include "unit_test_helpers.h"
-#include "variations/multi_quick_select.h"
-#include "variations/multi_select_by_nths_bisect.h"
+#include "multi_quick_select.h"
+#include "multi_select_by_nths_bisect.h"
 #include <gtest/gtest.h>
 
+/// Some correctness tests
 namespace multi_select_basics {
 
-
-#define multi_select_under_test   quickselect_nth_element::ranges::multi_quick_select
+  template<typename T, typename T2>
+  decltype(auto) multi_select_under_test(T&& r, T2&& nths, auto comp, auto proj) {
+    return nthexple::ranges::multi_intro_select(
+      std::forward<T>(r), std::forward<T2>(nths), comp, proj);
+  };
 
   template<class Ns, class Comp = std::ranges::less, class Proj = std::identity>
   static void checkNthElements(const std::vector<double>& v, const std::vector<double>& vOrgSorted, Ns& ns, Comp comp = {}, Proj proj = {})
@@ -86,7 +94,7 @@ namespace multi_select_basics {
     };
     #else
     constexpr auto thisProj = std::identity();
-    constexpr auto thisCompare = std::less();
+    constexpr auto thisCompare = std::ranges::less();
     #endif
 
     const auto checkAllUntil = 11137 / 10;
@@ -214,6 +222,47 @@ namespace multi_select_basics {
     multi_select_basics::nthElementsTests_dangle();
   }
 
+
+  TEST_F(NthElementsTestBasics, SingleSelectionCorrectness) {
+    for (const auto vecSizeNom : { 1,2,5,32,67,323,2221, 216'091 }) {
+      for (int round = 0; round < 6; ++round) {
+        std::knuth_b knuth(0xfeefdedeU + 7321 * static_cast<int>(vecSizeNom) + 99931321 * round);
+        const auto vecSize = vecSizeNom + 32;// *(1 + round) + (round * 3'021'377) % 263;
+        std::vector<double> vOrg(vecSize);
+        std::iota(vOrg.begin(), vOrg.end(), 0.0);
+        std::ranges::shuffle(vOrg, knuth);
+        auto v = vOrg;
+        auto v2 = vOrg;
+
+        auto vMid = v.begin() + v.size() / 2;
+        auto v2Mid = v2.begin() + v2.size() / 2;
+
+        (void)std::ranges::nth_element(v, vMid);
+        {
+          std::ranges::shuffle(v2, knuth);
+          (void)nthexple::ranges::quick_select(v2, v2Mid);
+          ASSERT_EQ(*v2Mid, *vMid);
+        }
+        {
+          std::ranges::shuffle(v2, knuth);
+          (void)nthexple::ranges::quick_medmed_select(v2, v2Mid);
+          ASSERT_EQ(*v2Mid, *vMid);
+        }
+        {
+          std::ranges::shuffle(v2, knuth);
+          auto v2midr = std::vector{ v2Mid };
+          (void)nthexple::ranges::multi_quick_select(v2, v2midr);
+          ASSERT_EQ(*v2Mid, *vMid);
+        }
+        {
+          std::ranges::shuffle(v2, knuth);
+          auto v2midr = std::vector{ v2Mid };
+          (void)nthexple::ranges::multi_intro_select(v2, v2midr);
+          ASSERT_EQ(*v2Mid, *vMid);
+        }
+      }
+    }
+  }
 }
 
 

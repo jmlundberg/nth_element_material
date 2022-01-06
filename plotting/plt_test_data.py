@@ -27,9 +27,10 @@ else:
     fname= "timing_data/datatableLarger_n1_equi.txt"
     label="equidistant partition points"
 
-    casename = "mqs_med3_equi"
+    casename = "ninther_mintroselect_equi"
     fname = "timing_data/dataLarger_"+casename+".txt"
 
+    label="equidistant partition points intro ninther"
 
 datafile="\n".join([l for l in open(fname).readlines() if not "#" in l]).replace("inf","10000.0")
 d=json.loads(datafile)

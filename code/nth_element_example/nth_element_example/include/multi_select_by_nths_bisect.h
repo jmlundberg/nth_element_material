@@ -1,10 +1,13 @@
-#pragma once
+/*
+ Johan Lundberg 2022-01-08
+*/
 
 #pragma once
 
 #include<algorithm>
 #include<ranges>
 #include<xutility>
+#include "selection_impl_utils.h"
 
 /**
  *
@@ -27,15 +30,7 @@ namespace multi_select_by_nth_bisect {
   
   namespace ranges {
 
-#ifdef _MSVC_STL_VERSION
-    using NotQuiteObject = std::ranges::_Not_quite_object;
-#else
-    struct NotQuiteObject
-    {
-      struct _Construct_tag {};
-      constexpr NotQuiteObject(_Construct_tag) {}
-    }; // Dummy
-#endif
+    using nthexple::NotQuiteObject;
 
     class Nth_elements_fn : private NotQuiteObject {
     public:

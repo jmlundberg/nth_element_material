@@ -93,7 +93,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='debug__|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)/externals/;$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(ProjectDir)src;$(ProjectDir)include;$(SolutionDir)/externals;$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -101,13 +101,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)/externals/;$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(ProjectDir)src;$(ProjectDir)include;$(SolutionDir)/externals;$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)/external/;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)/externals/;$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(ProjectDir)src;$(ProjectDir)include;$(SolutionDir)/externals;$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug__|Win32'">
     <ClCompile>
@@ -127,8 +127,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug__|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>
-      </WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>
       </PreprocessorDefinitions>
@@ -140,10 +139,11 @@
       <EnforceTypeConversionRules>
       </EnforceTypeConversionRules>
       <MinimalRebuild>false</MinimalRebuild>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -183,6 +183,7 @@
       <BrowseInformation>true</BrowseInformation>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <PrecompiledHeaderFile />
+      <DisableSpecificWarnings>5245; 4505</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -224,6 +225,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <PrecompiledHeaderFile />
+      <DisableSpecificWarnings>5245; 4505</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -233,25 +235,40 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\nth_element_basics.cpp" />
-    <ClCompile Include="src\nth_element_timings.cpp" />
-    <ClCompile Include="src\unit_test_helpers.cpp" />
-    <ClCompile Include="src\variations\multi_quick_select.cpp" />
-    <ClCompile Include="src\variations\multi_select_by_nths_bisect.cpp" />
-    <ClCompile Include="src\variations\multi_select_by_nths_bisect_at_center_iterator.cpp" />
+    <ClCompile Include="src\ensure_compile\selection_policies.cpp" />
+    <ClCompile Include="src\tests\nth_element_basics.cpp" />
+    <ClCompile Include="src\tests\nth_element_timings.cpp" />
+    <ClCompile Include="src\ensure_compile\unit_test_helpers.cpp" />
+    <ClCompile Include="src\tests\utils_t.cpp" />
+    <ClCompile Include="src\ensure_compile\multi_quick_select.cpp" />
+    <ClCompile Include="src\ensure_compile\multi_select_by_nths_bisect.cpp" />
+    <ClCompile Include="src\ensure_compile\multi_select_by_nths_bisect_at_center_iterator.cpp" />
+    <ClCompile Include="src\ensure_compile\quick_select.cpp" />
+    <ClCompile Include="src\ensure_compile\selection_impl_utils.cpp" />
+    <ClInclude Include="include\ms_stl_median_common.h" />
+    <ClInclude Include="include\selection_policies.h" />
     <ClInclude Include="leftover_headers\accumulate_text_example.h" />
     <ClInclude Include="leftover_headers\coords_example.h" />
     <ClInclude Include="src\P2375_nth_element.h" />
-    <ClInclude Include="src\unit_test_helpers.h" />
-    <ClInclude Include="src\variations\leftowers_misc.h" />
-    <ClInclude Include="src\variations\multi_quick_select.h" />
-    <ClInclude Include="src\variations\multi_select_by_nths_bisect.h" />
-    <ClInclude Include="src\variations\multi_select_by_nths_bisect_at_center_iterator.h" />
+    <ClInclude Include="src\tests\unit_test_helpers.h" />
+    <ClInclude Include="include\median_of_medians.h" />
+    <ClInclude Include="include\multi_quick_select.h" />
+    <ClInclude Include="include\multi_quick_select_common.h" />
+    <ClInclude Include="include\multi_select_by_nths_bisect.h" />
+    <ClInclude Include="include\multi_select_by_nths_bisect_at_center_iterator.h" />
+    <ClInclude Include="include\single_quick_select.h" />
+    <ClInclude Include="include\single_quick_select_common.h" />
+    <ClInclude Include="include\single_quick_select_declarations.h" />
+    <ClInclude Include="include\selection_impl_utils.h" />
+    <ClInclude Include="include\selection_impl_utils_fwd.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="src\multi_select_by_nth_bisect.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\gtest_main.cpp" />
+    <ClCompile Include="src\tests\gtest_main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
