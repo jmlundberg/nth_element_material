@@ -4,6 +4,7 @@
 
 
 The following is a study of an implementation of `multi_nth_element` of p2375 using the algorithm `multi_quick_select` found in this repository.
+More at [code/nth_element_example/nth_element_example/CODE_README.md](code/nth_element_example/nth_element_example/CODE_README.md)
 
  Links:
 
@@ -12,7 +13,7 @@ The following is a study of an implementation of `multi_nth_element` of p2375 us
 
 ## Time vs `std::sort` for equidistant partitioning points
 
-<img width="74%" src="plotting/images/mqs_med3_equi_speed_for_n_vs_sort.png?raw=1" />
+<img width="74%" src="plotting/images/multiselect_equi_speed_for_n_vs_sort.png?raw=1" />
 
 
 The above image shows the execution speed of a `multi_quick_select` implementation compared to `std::sort`} for various vector sizes `N`.
@@ -26,16 +27,16 @@ The following table shows a few speedup factors for a number of unique partition
 
 | m | speedup factor | at N |
 |:----------------|:--------|-----:|
-| 1 | 10 |  N=3e7  |
-| 5 | 5 |  N=3e7  |
-| 10 | 4.5 |  N=3e7  |
+| 1 | 11 |  N=3e7  |
+| 5 | 5.7 |  N=3e7  |
+| 10 | 4.7 |  N=3e7  |
 | 500 | 2.3 |  N=3e7  |
-| 1000 | 2.1 |  N=3e7  |
+| 1000 | 2.2 |  N=3e7  |
 
 | m | speedup factor | at N |
 |:----------------|:--------|-----:|
 | 10 | 3.6 |  N=3e5  |
-|50 | 2.4 |  N=3e5  |
+|50 | 2.5 |  N=3e5  |
 
 | m | speedup factor | at N |
 |:----------------|:--------|-----:|
@@ -44,25 +45,25 @@ The following table shows a few speedup factors for a number of unique partition
 Clearly, the benefit compared to std::sort is the greatest for smaller m. In these tests of  `multi_quick_select`, the performance are still not worse than `std::sort` even for `m ~ N`.
 The benefit over `sort` grows with `N` as `log N`.
 
-<img width="74%" src="plotting/images/mqs_med3_equi_time_for_n.png?raw=1" />
+<img width="74%" src="plotting/images/multiselect_equi_time_for_n.png?raw=1" />
 
 The above image shows a different view of the same data. The execution times for `std::sort` for various vector sizes `N` and for `multi_nth_element` with different numbers `m` of evenly spaced partitioning points in the vector. Arbitrary normalization.
 
 The complexity of `multi_nth_element` is `O(N log m)`. Therefore a thin line `k_i × N` is also drawn for each curve `i` where `k_i` is set to match at `N=3e6`. For `std::sort`, a dotted line `s × N log N` is drawn instead. (Note how similar `N log N` and `N` looks in log-log.)
 
-<img width="74%" src="plotting/images/mqs_med3_equi_time_for_n_div.png?raw=1" />
+<img width="74%" src="plotting/images/multiselect_equi_time_for_n_div.png?raw=1" />
 
 This is the same data as shown in the previous figure except all data points are divided by the `s × N log N` curve described above.
 In other words, the image represents the execution time compared to the expected `N log N` of `std::sort` at `N=3e6`. As expected, the `std::sort` line approaches `1.0` for large `N`, while the relative execution time for `multi_nth_element` decreases as `1/log N` for large N.
 
-<img width="74%" src="plotting/images/mqs_med3_equi_speed_for_m_vs_sort.png?raw=1" />
+<img width="74%" src="plotting/images/multiselect_equi_speed_for_m_vs_sort.png?raw=1" />
 
 Another view of the same data, but shows the speedup as function of `m` for different vector sizes `N`.
 It's interesting that even for quite small `N=3e4` there are speedups of `2` to `6` times for `m=1` to `m=20`.
 
 ## Time vs `std::sort` for randomized partitioning points
 
-The same directory of images contain plots for the case where the partitioning points are uniformly random (unique) instead of the equidistant points above. The conclusions are very similar, but the performance is slightly better. To find the corresponding image: Change the names from `equiv` to `rnd`.
+The case where the partitioning points are uniformly random (unique) instead of the equidistant points above we investigated. The conclusions are very similar, but the performance is slightly better, as expected since some of the partition points may be close to each other or identical.
 
 ## Data generation and scripts
 

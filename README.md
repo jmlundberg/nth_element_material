@@ -3,7 +3,6 @@
 ## Material on nth_element and P3275
 </div>
 
-
 This repo contains a simple implementation, a basics performance study, examples and
 background material on
 https://github.com/jmlundberg/p2375 :
@@ -16,11 +15,9 @@ The single-nth
 
 The range-of-nths overload proposed in P2375 has complexity: O(N log m) where m is the number of unique partitioning points.
 
-
 #### Reference implementation
 
-A simple implementation of the range-of-nths version of `nth_element` is found at
-[code/nth_element_example/nth_element_example/src/P2375R0_nth_element.h](code/nth_element_example/nth_element_example/src/P2375R0_nth_element.h)
+Several implementations of *multi selection*, aka range-of-nths `nth_element` is found at [code/nth_element_example/nth_element_example/CODE_README.md](code/nth_element_example/nth_element_example/CODE_README.md)
 
 #### Measurement on a basic implementation
 

@@ -12,6 +12,7 @@ import math
 from matplotlib import pyplot as plt 
 import matplotlib
 inf=numpy.nan
+import os
 
 random_partitions=False
 if random_partitions:
@@ -30,7 +31,16 @@ else:
     casename = "ninther_mintroselect_equi"
     fname = "timing_data/dataLarger_"+casename+".txt"
 
-    label="equidistant partition points intro ninther"
+    label="equidistant partition points"
+
+outdirpart="/tmp/"
+if 1:
+    outdirpart=""
+    if random_partitions:
+        casename="multiselect_rand"
+    else:
+        casename="multiselect_equi"
+   
 
 datafile="\n".join([l for l in open(fname).readlines() if not "#" in l]).replace("inf","10000.0")
 d=json.loads(datafile)
@@ -45,10 +55,16 @@ def removeOutliers(data,outliers):
         #raise Exception("too little data")
     return numpy.partition(data,[outliers,len(data)-outliers-1],axis=0)[outliers:len(data)-outliers-1]
 #    return numpy.partition(data,[outliers,trials-outliers-1],axis=0)[outliers:trials-outliers-1]
+from PIL import Image
 
 def saveFig(fg,name):
-    fg.savefig(name, dpi=600,bbox_inches='tight')
-    
+    #fg.savefig(name+".pdf", dpi=300,optimize=True,quality=10,bbox_inches='tight')
+    bname=os.path.basename(name).replace(".png","")
+    fg.savefig("images/tmp/tmp.png", dpi=300,quality=10,bbox_inches='tight')
+    fg.savefig("images/tmp/"+bname+".pdf", dpi=600,optimize=True,bbox_inches='tight')
+    colorImage = Image.open("images/tmp/tmp.png").convert('RGB')
+    imageWithColorPalette = colorImage.convert("P", palette=Image.ADAPTIVE, colors=256)
+    imageWithColorPalette.save(name,optimize=True,quality=10)
 
 fig, ax1 = plt.subplots() 
 fig.set_figwidth(4)

@@ -20,19 +20,18 @@ def savePhotoSmaller(img,basename):
     wpercent = (basewidth/float(img.size[0]))
     hsize = int((float(img.size[1])*float(wpercent)))    
     img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-    img.save("out_small/"+basename+'.small.png',optimize = True)
+    #img.save("out_small/"+basename+'.small.png',optimize = True)
     img.save("out_small/"+basename+'.small.jpg',quality=45,optimize = True)
 
 def savePhoto(img,basename):
-    img.save("out_large/"+basename+".png",optimize=True)
-    img.save("out_large/"+basename+".jpg",quality=20,optimize= True)
+    #img.save("out_large/"+basename+".png",optimize=True)
+    #img.save("out_large/"+basename+".jpg",quality=20,optimize= True)
     savePhotoSmaller(img,basename)
 
 def saveFig(fg,name):
     fg.savefig("out_large/"+name, dpi=600,bbox_inches='tight')
 
-for imgname in ("einstein","forsen"):
-    
+for imgname in ["forsen","einstein"]:
     im = Image.open(imgname+".png")
     data = np.asarray(im)
     ColMax=2**16-1.0 # values in image
@@ -46,7 +45,10 @@ for imgname in ("einstein","forsen"):
     
     #roundtrip check with same image sizes and compression
     if True:
-        roundtrip = Image.fromarray(data/dispScale)
+        dispScaleHere=dispScale
+        if "forsen" in imgname:
+            dispScaleHere=1
+        roundtrip = Image.fromarray(data/dispScaleHere)
         roundtrip = roundtrip.convert('RGB')
         savePhoto(roundtrip,imgname+"_roundtrip")
     
