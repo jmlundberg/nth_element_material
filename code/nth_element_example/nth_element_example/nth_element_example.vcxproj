@@ -268,7 +268,7 @@
     <ClCompile Include="src\tests\gtest_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md" />
+    <None Include="CODE_README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

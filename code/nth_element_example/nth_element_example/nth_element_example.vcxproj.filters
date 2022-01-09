@@ -34,6 +34,6 @@
     <ClInclude Include="include\selection_policies.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md" />
+    <None Include="CODE_README.md" />
   </ItemGroup>
 </Project>
